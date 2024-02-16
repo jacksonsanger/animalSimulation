@@ -1,18 +1,20 @@
 package hw;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import edu.du.dudraw.Draw;
 
 public class Human extends Avatar implements Drawable{
 	
-	//extra attribute to track the last location so that the human can move more easily only on roads
-	
-	protected GridPoint lastLocation;  
+	//random variable to introduce random movement to tiles that are only road
+	private Random random;
+	//movement buffer, humans are on the slower end, so they will only move every three steps
+	private int movementBuffer = 0;
 
 	protected Human(TerrainMap tm, GridPoint location) {
 		super(tm, location);
-		this.lastLocation = null;
+		this.random = new Random();
 	}
 
 	public void draw(Draw duDwin) {
@@ -22,22 +24,18 @@ public class Human extends Avatar implements Drawable{
 	}
 	
     public void move() {
-        ArrayList<GridPoint> options = location.getNeighbors(1);
-        // Filter out the non-road tiles and the last location to avoid backtracking
-        options.removeIf(neighbor -> !isRoad(neighbor) || neighbor.equals(lastLocation));
-
-        if (options.size() > 0) {
-            // Select the next move from the available road options
-            location = options.get(0); // This could be a more sophisticated selection if needed
-            lastLocation = location;
-        } else if (isRoad(lastLocation)) {
-            // If no other option, move back to the last location if it's a road
-            location = lastLocation;
-            lastLocation = null; // Clear the last location as we're backtracking
-        }
-    }
-
-    private boolean isRoad(GridPoint point) {
-        return tm.getBumpy(point) == 0;
+    	if(movementBuffer % 3 == 0) {
+	        ArrayList<GridPoint> options = location.getNeighbors(1);
+	        // Filter out the non-road tiles
+	        options.removeIf(neighbor -> tm.getBumpy(neighbor) != 0);
+	
+	        // If there are road options, choose one at random
+	        if (!options.isEmpty()) {
+	            int randomIndex = random.nextInt(options.size()); // Select a random index
+	            location = options.get(randomIndex); // Move to the selected road tile
+	        }
+	        // If there are no road options, the human will not move
+    	}
+    	movementBuffer ++;
     }
 }

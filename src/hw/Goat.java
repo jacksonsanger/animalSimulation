@@ -1,8 +1,11 @@
 package hw;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+
 import edu.du.dudraw.Draw;
 
-public class Goat extends Avatar implements Drawable{
+public class Goat extends AvatarThatEats implements Drawable{
 
 	protected Goat(TerrainMap tm, GridPoint location) {
 		super(tm, location);
@@ -16,9 +19,33 @@ public class Goat extends Avatar implements Drawable{
 	
 	
 	public void move() {
-		
+        ArrayList<GridPoint> options = location.getNeighbors(2);
+        
+        // Filter out the current location
+        options.remove(location);
+
+        // Now, sort the options based on the amount of vegetation, descending
+        options.sort(Comparator.comparingInt((GridPoint o) -> tm.getVeg(o)).reversed());
+
+        // Move to the tile with the most vegetation if there is any
+        for (GridPoint potentialMove : options) {
+            if (tm.getVeg(potentialMove) > 0) {
+                location = potentialMove; // Update the goat's location to the new tile with most vegetation
+                break; // Break after moving
+            }
+        }
+
+        // If the goat moved, eat from the new tile
+        if (tm.getVeg(location) > 0) {
+            eat(20);
+        }
+    }
+
+	@Override
+	//Call the eat method for the current location of the goat
+	public void eat(int amt) {
+		tm.theTiles.get(location).eat(amt);
 		
 	}
 	
-
 }

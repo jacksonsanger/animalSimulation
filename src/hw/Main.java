@@ -29,11 +29,14 @@ public class Main {
 		 // TODO: Make the avatars
 		 // Remember (0,0) is in the lower left corner
 			Avatar human = AvatarFactory.newAvatar("human", tm, new GridPoint(2, 0));
-			Avatar duck = AvatarFactory.newAvatar("duck", tm, new GridPoint(9, 15));
+			// add two ducks to show off differing behavior
+			Avatar duck = AvatarFactory.newAvatar("duck", tm, new GridPoint(20, 15));
+			Avatar duck2 = AvatarFactory.newAvatar("duck", tm, new GridPoint(10, 15));
 			Avatar cow = AvatarFactory.newAvatar("cow", tm, new GridPoint(6, 6));
 			Avatar goat = AvatarFactory.newAvatar("goat", tm, new GridPoint(11, 4));
 			tp.addAvatar(human);
 			tp.addAvatar(duck);
+			tp.addAvatar(duck2);
 			tp.addAvatar(cow);
 			tp.addAvatar(goat);
 		
