@@ -31,8 +31,13 @@ public class GridPoint {
 	}
 	
 	public boolean equals(Object o) {
-		GridPoint gp = (GridPoint) o;
-		return ((this.x == gp.x) && (this.y == gp.y));
+		if(o instanceof GridPoint) {
+			GridPoint gp = (GridPoint) o;
+			return ((this.x == gp.x) && (this.y == gp.y));
+		}
+		else{
+			return false;
+		}	
 	}
 	
 	public int hashCode() {
@@ -40,8 +45,21 @@ public class GridPoint {
 	}
 	
 	public ArrayList<GridPoint> getNeighbors(int levels) {
-		ArrayList<GridPoint> al = new ArrayList<GridPoint>();
-		//TODO: neighbor finding code
-		return al;
+	    ArrayList<GridPoint> a1 = new ArrayList<>();
+	    // Only consider points that are exactly 'levels' steps away in at least one axis.
+	    for (int dx = -levels; dx <= levels; dx++) {
+	        for (int dy = -levels; dy <= levels; dy++) {
+	            int newX = x + dx;
+	            int newY = y + dy;
+	            // Skip the current point itself
+	            if (dx == 0 && dy == 0) continue;
+	            // Only add points that are 'levels' steps away in at least one dimension
+	            if ((Math.abs(dx) == levels || Math.abs(dy) == levels) && newX >= 0 && newX < TerrainMap.gridWidth && newY >= 0 && newY < TerrainMap.gridHeight) {
+	                a1.add(new GridPoint(newX, newY));
+	            }
+	        }
+	    }
+	    return a1;
 	}
+
 }

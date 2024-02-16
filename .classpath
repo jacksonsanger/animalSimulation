@@ -6,6 +6,6 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="/Users/iffat.anjum/git/HW3-Milestone-AnimalSimulation/dudraw.jar"/>
+	<classpathentry kind="lib" path="C:/Users/jsang/git/homework-3-animal-simulation-final-jacksonsanger/dudraw.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

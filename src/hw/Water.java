@@ -17,19 +17,20 @@ public class Water extends TerrainTile {
 	
 	@Override
 	public int getVeg() {
-		// Water is vegetated
+		// Water is not vegetated
 		return 0;
 	}
 
 	@Override
 	public int getBumpy() {
 		// Water is fairly smooth
-		return 0;
+		return 20;
 	}
 
 	@Override
 	public int getWet() {
 		// Water is very wet
-		return 0;
+		return 100;
 	}
+	
 }

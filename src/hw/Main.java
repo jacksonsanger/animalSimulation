@@ -24,15 +24,23 @@ public class Main {
 		// Make the display panel
 		SimWindow tp = new SimWindow(tm);
 
-//		try {
-//
-		// TODO: Make the avatars
-		// Remember (0,0) is in the lower left corner
-//		
-//		} catch (BadAvatarException e) {
-//			e.printStackTrace();
-//			return;
-//		}
+		try {
+
+		 // TODO: Make the avatars
+		 // Remember (0,0) is in the lower left corner
+			Avatar human = AvatarFactory.newAvatar("human", tm, new GridPoint(2, 0));
+			Avatar duck = AvatarFactory.newAvatar("duck", tm, new GridPoint(9, 15));
+			Avatar cow = AvatarFactory.newAvatar("cow", tm, new GridPoint(6, 6));
+			Avatar goat = AvatarFactory.newAvatar("goat", tm, new GridPoint(11, 4));
+			tp.addAvatar(human);
+			tp.addAvatar(duck);
+			tp.addAvatar(cow);
+			tp.addAvatar(goat);
+		
+		} catch (BadAvatarException e) {
+			e.printStackTrace();
+			return;
+		}
 
 		// Start the simulation
 		tp.runSimulation();

@@ -66,25 +66,8 @@ public class TerrainMap implements Drawable {
 				// Make a GridPoint for the coords read in
 				GridPoint loc = new GridPoint(x,y);
 				
-				TerrainTile tt;
-				
-				if (currentTile.equalsIgnoreCase("g")) {
-					tt = new Grass(loc);
-				} else if (currentTile.equalsIgnoreCase("r")) {
-					tt = new Road(loc);
-				} else if (currentTile.equalsIgnoreCase("m")) {
-					tt = new Mountain(loc);
-				} else if (currentTile.equalsIgnoreCase("w")) {
-					tt = new Water(loc);
-				} else {
-					throw new InvalidTerrainTypeException("Bad terrain type " + currentTile);
-				}
-
-				// Factory method
+				TerrainTile tt = TerrainTileFactory.newTerrainTile(currentTile, loc);
 				theTiles.put(loc, tt);
-				
-
-
 			}
 		}
 
@@ -111,20 +94,24 @@ public class TerrainMap implements Drawable {
 	}
 
 	// Methods to get access to the individual tiles
-	//   veg, wet, bumpy, and eat methods
+	// veg, wet, bumpy, and eat methods
 	public int getVeg(GridPoint position) {		
-		return 0;
+		TerrainTile tt = theTiles.get(position);
+		return tt.getVeg();
 	}
 
 	public int getWet(GridPoint position) {
-		return 0;
+		TerrainTile tt = theTiles.get(position);
+		return tt.getWet();
 	}
 
 	public int getBumpy(GridPoint position) {
-		return 0;
+		TerrainTile tt = theTiles.get(position);
+		return tt.getBumpy();
 	}
 
 	public void eat(GridPoint position, int amt) {
-
+		TerrainTile tt = theTiles.get(position);
+		tt.eat(amt);
 	}
 }

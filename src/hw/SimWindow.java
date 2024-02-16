@@ -42,6 +42,7 @@ public class SimWindow {
 	// Add the avatars 1 by 1
 	public void addAvatar(Avatar a) {
 		//TODO: Add avatar
+		theAvatars.add(a);
 	}
 
 
@@ -51,7 +52,10 @@ public class SimWindow {
 		// Draw the board
 		tm.draw(duDwin);
 		
-		// TODO: Draw the avatar
+		// TODO: Draw the avatars
+		for(Avatar avatar : theAvatars) {
+			avatar.draw(duDwin);
+		}
 		
 		duDwin.show();  // used in double buffering
 	}
@@ -71,7 +75,10 @@ public class SimWindow {
 				}
 				
 				// TODO: Avatar movement here
-				// update();
+				for(Avatar avatar: theAvatars) {
+					avatar.move();
+				}
+				update();
 			}
 		}
 		

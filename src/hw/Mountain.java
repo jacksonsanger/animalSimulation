@@ -19,10 +19,6 @@ public class Mountain extends TerrainTile {
 		this.veg = r.nextInt(50);
 	}
 	
-	@Override
-	public void eat(int amt) {
-
-	}
 
 	@Override
 	public void setColor(Draw duDwin) {
@@ -33,18 +29,23 @@ public class Mountain extends TerrainTile {
 	@Override
 	public int getVeg() {
 		// TODO:If we make this negative then there is no food
-		return 0;
+		return veg;
 	}
 
 	@Override
 	public int getBumpy() {
 		// TODO:// Mountains are very bumpy
-		return 0;
+		return 100;
 	}
 
 	@Override
 	public int getWet() {
 		// // TODO:Mountains aren't wet
 		return 0;
+	}
+	
+	@Override
+	public void eat(int amt) {
+		veg -= amt;
 	}
 }

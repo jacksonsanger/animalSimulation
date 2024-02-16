@@ -26,20 +26,24 @@ public class Grass extends TerrainTile {
 
 	@Override
 	public int getVeg() {
-		// TODO Auto-generated method stub
-		return 0;
+		return veg;
 	}
 
 	@Override
 	public int getBumpy() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 10;
 	}
 
 	@Override
 	public int getWet() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	@Override
+	public void eat(int amt) {
+		veg -= amt;
 	}
 
 
